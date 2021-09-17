@@ -1,0 +1,16 @@
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\BattleSea.exe
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\BattleSea.deps.json
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\BattleSea.runtimeconfig.json
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\BattleSea.runtimeconfig.dev.json
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\BattleSea.dll
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\ref\BattleSea.dll
+D:\OneDrive\Code\C#\MyProjects\BattleSea\bin\Release\net5.0\BattleSea.pdb
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.csproj.AssemblyReference.cache
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.GeneratedMSBuildEditorConfig.editorconfig
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.AssemblyInfoInputs.cache
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.AssemblyInfo.cs
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.csproj.CoreCompileInputs.cache
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.dll
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\ref\BattleSea.dll
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.pdb
+D:\OneDrive\Code\C#\MyProjects\BattleSea\obj\Release\net5.0\BattleSea.genruntimeconfig.cache
