@@ -6,34 +6,67 @@ namespace BattleSea
     {
         static void Main(string[] args)
         {
-            Gamer gamer1;
-            Gamer gamer2;
-            string input = string.Empty;
-            string yesOrNo = string.Empty;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Black;
 
-            Console.Write("Enter first player's name or press ENTER: ");
-            input = Console.ReadLine();
-            if (input.Length > 0) 
-                gamer1 = new Gamer(input, ConsoleColor.Blue);
-            else 
-                gamer1 = new Gamer("Player 1", ConsoleColor.Blue);
+            Player player1;
+            Player player2;
+            string playerName = string.Empty;
+            string exitTheGame = string.Empty;
 
-            Console.Write("Enter second player's name or press ENTER: ");
-            input = Console.ReadLine();
-            if (input.Length > 0) 
-                gamer2 = new Gamer(input, ConsoleColor.DarkGreen);
-            else 
-                gamer2 = new Gamer("Player 2", ConsoleColor.DarkGreen);
+            Print("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
 
-            while (yesOrNo.ToLower() != "n")
+            Print("Enter 1-st player's name or press ENTER: ");
+            playerName = Console.ReadLine();
+
+            if (playerName.Length > 0)
+                player1 = new Player(playerName, ConsoleColor.DarkCyan);
+            else
+                player1 = new Player("Player 1", ConsoleColor.DarkCyan);
+
+            Print("Enter 2-nd player's name or press ENTER: ");
+            playerName = Console.ReadLine();
+
+            if (playerName.Length > 0)
+                player2 = new Player(playerName, ConsoleColor.DarkGreen);
+            else
+                player2 = new Player("Player 2", ConsoleColor.DarkGreen);
+
+            while (exitTheGame.ToLower() != "n")
             {
-                ShipsLocator field1 = new ShipsLocator(BattleField.GetField());
-                string[][] ships1 = field1.LocateShips(field1.field, gamer1);
+                ShipsCreator player1Field = new ShipsCreator(BattleField.GetNewField());
+                string[][] player1Ships = player1Field.CreateShips(player1);
 
-                ShipsLocator field2 = new ShipsLocator(BattleField.GetField());
-                string[][] ships2 = field2.LocateShips(field2.field, gamer2);
+                ShipsCreator player2Field = new ShipsCreator(BattleField.GetNewField());
+                string[][] player2Ships = player2Field.CreateShips(player2);
 
-                yesOrNo = BattleField.StartBattle(gamer1, gamer2, ships1, ships2);
+                exitTheGame = BattleField.StartBattle(player1, player2, player1Ships, player2Ships);
+            }
+        }
+
+        public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ForegroundColor = ConsoleColor.Black;
+        }
+
+        public static void PrintBattleField(string[][] ships)
+        {
+            Console.Clear();
+            Print("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
+
+            for (int i = 0; i < ships.Length; i++)
+            {
+                Console.Write("  ");
+
+                for (int j = 0; j < ships[i].Length; j++)
+                {
+                    Console.Write(ships[i][j] + " ");
+                }
+
+                Console.WriteLine();
             }
         }
     }

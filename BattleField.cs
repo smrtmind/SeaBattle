@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BattleSea
 {
     public class BattleField
     {
-        static public string[][] field { get; private set; }
+        public static string[][] field { get; private set; }
 
-        static public string[][] GetField()
+        public static string[][] GetNewField()
         {
             field = new string[11][];
 
@@ -21,9 +22,7 @@ namespace BattleSea
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
             for (int j = 1; j < field[0].Length; j++)
-            {
                 field[0][j] = letters[j - 1];
-            }
 
             //initialization of first numbers
             for (int i = 1; i < field.Length; i++)
@@ -36,93 +35,85 @@ namespace BattleSea
 
             //initializition of fillers
             for (int i = 1; i < field.Length; i++)
-            {
                 for (int j = 1; j < field[i].Length; j++)
-                {
-                    field[i][j] = ".";//(j + 1).ToString()
-                }
-            }
+                    field[i][j] = ".";
 
-            Console.BackgroundColor = ConsoleColor.Gray;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Black;
-
-            Gamer.PrintCurrentField(field);
+            Program.PrintBattleField(field);
 
             return field;
         }
 
-        static public string StartBattle(Gamer gamer1, Gamer gamer2, string[][] ships1, string[][] ships2)
+        public static string StartBattle(Player player1, Player player2, string[][] player1Ships, string[][] player2Ships)
         {
             int player1ShipDetails = 20;
             int player2ShipDetails = 20;
-            string[][] player1Field = BattleField.GetField();
-            string[][] player2Field = BattleField.GetField();
-            string yesOrNo = string.Empty;
+            string[][] player1Field = GetNewField();
+            string[][] player2Field = GetNewField();
+            string exitTheGame = string.Empty;
 
             while (player1ShipDetails != 0 || player2ShipDetails != 0)
             {
-                player2ShipDetails = Process(gamer1, player1Field, ships2, ref player2ShipDetails);
+                player2ShipDetails = NextTurn(player1, player1Field, player2Ships, ref player2ShipDetails);
                 if (player2ShipDetails == 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"\n\t{gamer1.name} won :)\n");
+                    Console.ForegroundColor = player1.color;
+                    Console.WriteLine($"\n  {player1.name} won :)\n");
                     Console.ForegroundColor = ConsoleColor.Black;
                     break;
                 }
 
-                player1ShipDetails = Process(gamer2, player2Field, ships1, ref player1ShipDetails);
+                player1ShipDetails = NextTurn(player2, player2Field, player1Ships, ref player1ShipDetails);
                 if (player1ShipDetails == 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"\n\t{gamer2.name} won :)\n");
+                    Console.ForegroundColor = player2.color;
+                    Console.WriteLine($"\n  {player2.name} won :)\n");
                     Console.ForegroundColor = ConsoleColor.Black;
                     break;
                 }
             }
 
-            while (yesOrNo.ToLower() != "y" || yesOrNo.ToLower() != "n")
+            while (exitTheGame.ToLower() != "y" || exitTheGame.ToLower() != "n")
             {
                 Console.Write("  Do you want to play again? [y] / [n]: ");
-                yesOrNo = Console.ReadLine();
+                exitTheGame = Console.ReadLine();
 
-                if (yesOrNo == "y")
+                if (exitTheGame == "y")
                 {
                     Console.Clear();
                     break;
                 }
 
-                if (yesOrNo == "n")
+                if (exitTheGame == "n")
                 {
                     Console.Clear();
                     break;
                 }
             }
 
-            return yesOrNo;
+            return exitTheGame;
         }
 
-        static public int Process(Gamer gamer, string[][] playerField, string[][] ships, ref int playerShipDetails)
+        private static int NextTurn(Player player, string[][] playerField, string[][] playerShips, ref int playerShipDetails)
         {
             int letter = 0;
             int number = 0;
             int indexOfLetter = 0;
             string input = string.Empty;
-            bool elementFound = false;
+            bool elementIsFound = false;
 
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
             int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             while (playerShipDetails != 0)
             {
-                elementFound = false;
+                elementIsFound = false;
 
-                while (!elementFound)
+                while (!elementIsFound)
                 {
-                    Gamer.PrintCurrentField(playerField);
+                    Program.PrintBattleField(playerField);
 
-                    Console.ForegroundColor = gamer.color;
-                    Console.WriteLine($"\n  {gamer.name} turn");
+                    Console.ForegroundColor = player.color;
+                    Console.WriteLine($"\n  {player.name} turn\n");
                     Console.ForegroundColor = ConsoleColor.Black;
 
                     Console.Write("  Enter the letter: ");
@@ -132,7 +123,7 @@ namespace BattleSea
                     {
                         if (input == letters[j])
                         {
-                            elementFound = true;
+                            elementIsFound = true;
                             indexOfLetter = j;
                             letter = numbers[j];
                             break;
@@ -140,14 +131,14 @@ namespace BattleSea
                     }
                 }
 
-                elementFound = false;
+                elementIsFound = false;
 
-                while (!elementFound)
+                while (!elementIsFound)
                 {
-                    Gamer.PrintCurrentField(playerField);
+                    Program.PrintBattleField(playerField);
 
-                    Console.ForegroundColor = gamer.color;
-                    Console.WriteLine($"\n  {gamer.name} turn");
+                    Console.ForegroundColor = player.color;
+                    Console.WriteLine($"\n  {player.name} turn\n");
                     Console.ForegroundColor = ConsoleColor.Black;
 
                     Console.WriteLine($"  Enter the letter: {letters[indexOfLetter]}");
@@ -158,31 +149,42 @@ namespace BattleSea
                     {
                         if (number == numbers[j])
                         {
-                            elementFound = true;
+                            elementIsFound = true;
                             break;
                         }
-                    }                  
+                    }
                 }
 
-                if (ships[number][letter] == "\u25A0")
+                if (playerShips[number][letter] == "\u25A0")
                 {
                     playerField[number][letter] = "X";
-                    ships[number][letter] = "X";
+                    playerShips[number][letter] = "X";
                     playerShipDetails--;
 
-                    Gamer.PrintCurrentField(playerField);
+                    Program.Print("  BOOM!", ConsoleColor.DarkRed);
+                    Thread.Sleep(1000);
+
+                    Program.PrintBattleField(playerField);
                 }
 
-                else if (ships[number][letter] == ".")
+                else if (playerShips[number][letter] == ".")
                 {
                     playerField[number][letter] = "o";
-                    ships[number][letter] = "o";
+                    playerShips[number][letter] = "o";
 
-                    Gamer.PrintCurrentField(playerField);
+                    Program.Print("  miss", ConsoleColor.Red);
+                    Thread.Sleep(1000);
+
+                    Program.PrintBattleField(playerField);
                     break;
                 }
 
-                else continue;
+                else
+                {
+                    Program.Print("  you already shot here", ConsoleColor.Red);
+                    Thread.Sleep(2000);
+                    continue;
+                }
             }
 
             return playerShipDetails;
