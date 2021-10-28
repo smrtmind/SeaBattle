@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BattleSea
 {
@@ -38,7 +34,7 @@ namespace BattleSea
                 for (int j = 1; j < field[i].Length; j++)
                     field[i][j] = ".";
 
-            Program.PrintBattleField(field);
+            Print.BattleField(field);
 
             return field;
         }
@@ -74,7 +70,7 @@ namespace BattleSea
 
             while (exitTheGame.ToLower() != "y" || exitTheGame.ToLower() != "n")
             {
-                Console.Write("  Do you want to play again? [y] / [n]: ");
+                Print.Text("  Do you want to play again? [y] / [n]: ");
                 exitTheGame = Console.ReadLine();
 
                 if (exitTheGame == "y")
@@ -110,13 +106,13 @@ namespace BattleSea
 
                 while (!elementIsFound)
                 {
-                    Program.PrintBattleField(playerField);
+                    Print.BattleField(playerField);
 
                     Console.ForegroundColor = player.color;
-                    Console.WriteLine($"\n  {player.name} turn\n");
+                    Print.Text($"\n  {player.name} turn\n\n");
                     Console.ForegroundColor = ConsoleColor.Black;
 
-                    Console.Write("  Enter the letter: ");
+                    Print.Text("  Enter the letter: ");
                     input = Console.ReadLine().ToUpper();
 
                     for (int j = 0; j < letters.Length; j++)
@@ -135,14 +131,14 @@ namespace BattleSea
 
                 while (!elementIsFound)
                 {
-                    Program.PrintBattleField(playerField);
+                    Print.BattleField(playerField);
 
                     Console.ForegroundColor = player.color;
-                    Console.WriteLine($"\n  {player.name} turn\n");
+                    Print.Text($"\n  {player.name} turn\n\n");
                     Console.ForegroundColor = ConsoleColor.Black;
 
-                    Console.WriteLine($"  Enter the letter: {letters[indexOfLetter]}");
-                    Console.Write("  Enter the number: ");
+                    Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
+                    Print.Text("  Enter the number: ");
                     int.TryParse(Console.ReadLine(), out number);
 
                     for (int j = 0; j < numbers.Length; j++)
@@ -161,10 +157,10 @@ namespace BattleSea
                     playerShips[number][letter] = "X";
                     playerShipDetails--;
 
-                    Program.Print("  BOOM!", ConsoleColor.DarkRed);
+                    Print.Text("  BOOM!", ConsoleColor.DarkRed);
                     Thread.Sleep(1000);
 
-                    Program.PrintBattleField(playerField);
+                    Print.BattleField(playerField);
                 }
 
                 else if (playerShips[number][letter] == ".")
@@ -172,16 +168,16 @@ namespace BattleSea
                     playerField[number][letter] = "o";
                     playerShips[number][letter] = "o";
 
-                    Program.Print("  miss", ConsoleColor.Red);
+                    Print.Text("  miss", ConsoleColor.Red);
                     Thread.Sleep(1000);
 
-                    Program.PrintBattleField(playerField);
+                    Print.BattleField(playerField);
                     break;
                 }
 
                 else
                 {
-                    Program.Print("  you already shot here", ConsoleColor.Red);
+                    Print.Text("  you already shot here", ConsoleColor.Red);
                     Thread.Sleep(2000);
                     continue;
                 }

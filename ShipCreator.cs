@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BattleSea
 {
@@ -53,14 +49,14 @@ namespace BattleSea
 
                     while (!elementIsFound)
                     {
-                        Program.PrintBattleField(field);
+                        Print.BattleField(field);
 
                         Console.ForegroundColor = player.color;
-                        Console.WriteLine($"\n  {player.name} place your ships\n");
+                        Print.Text($"\n  {player.name} place your ships\n\n");
                         Console.ForegroundColor = ConsoleColor.Black;
 
-                        Console.WriteLine($"  {text} ({amountOfShips} remaining)");
-                        Console.Write("  Enter the letter: ");
+                        Print.Text($"  {text} ({amountOfShips} remaining)\n");
+                        Print.Text("  Enter the letter: ");
                         input = Console.ReadLine().ToUpper();
 
                         for (int j = 0; j < letters.Length; j++)
@@ -79,15 +75,15 @@ namespace BattleSea
 
                     while (!elementIsFound)
                     {
-                        Program.PrintBattleField(field);
+                        Print.BattleField(field);
 
                         Console.ForegroundColor = player.color;
-                        Console.WriteLine($"\n  {player.name} place your ships\n");
+                        Print.Text($"\n  {player.name} place your ships\n\n");
                         Console.ForegroundColor = ConsoleColor.Black;
 
-                        Console.WriteLine($"  {text} ({amountOfShips} remaining)");
-                        Console.WriteLine($"  Enter the letter: {letters[indexOfLetter]}");
-                        Console.Write("  Enter the number: ");
+                        Print.Text($"  {text} ({amountOfShips} remaining)\n");
+                        Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
+                        Print.Text("  Enter the number: ");
                         int.TryParse(Console.ReadLine(), out number);
 
                         for (int j = 0; j < numbers.Length; j++)
@@ -97,7 +93,7 @@ namespace BattleSea
 
                     if (field[number][letter] == "\u25A0")
                     {
-                        Program.Print("  this cell is already occupied", ConsoleColor.Red);
+                        Print.Text("  this cell is already occupied", ConsoleColor.Red);
                         Thread.Sleep(2000);
                         continue;
                     }
@@ -106,7 +102,7 @@ namespace BattleSea
                     {
                         field[number][letter] = "\u25A0";
                         remainingParts--;
-                        Program.PrintBattleField(field);
+                        Print.BattleField(field);
                     }
                 }
 
