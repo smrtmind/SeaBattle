@@ -52,38 +52,22 @@ namespace BattleSea
                 player2ShipDetails = NextTurn(player1, player1Field, player2Ships, ref player2ShipDetails);
                 if (player2ShipDetails == 0)
                 {
-                    Console.ForegroundColor = player1.color;
-                    Console.WriteLine($"\n  {player1.name} won :)\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    Print.Text($"\n  {player1.name} won :)\n\n", player1.color);
                     break;
                 }
 
                 player1ShipDetails = NextTurn(player2, player2Field, player1Ships, ref player1ShipDetails);
                 if (player1ShipDetails == 0)
                 {
-                    Console.ForegroundColor = player2.color;
-                    Console.WriteLine($"\n  {player2.name} won :)\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    Print.Text($"\n  {player2.name} won :)\n\n", player2.color);
                     break;
                 }
             }
 
-            while (exitTheGame.ToLower() != "y" || exitTheGame.ToLower() != "n")
+            while (exitTheGame.ToLower() != "y" && exitTheGame.ToLower() != "n")
             {
                 Print.Text("  Do you want to play again? [y] / [n]: ");
                 exitTheGame = Console.ReadLine();
-
-                if (exitTheGame == "y")
-                {
-                    Console.Clear();
-                    break;
-                }
-
-                if (exitTheGame == "n")
-                {
-                    Console.Clear();
-                    break;
-                }
             }
 
             return exitTheGame;
@@ -108,10 +92,7 @@ namespace BattleSea
                 {
                     Print.BattleField(playerField);
 
-                    Console.ForegroundColor = player.color;
-                    Print.Text($"\n  {player.name} turn\n\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
-
+                    Print.Text($"\n  {player.name} turn\n\n", player.color);
                     Print.Text("  Enter the letter: ");
                     input = Console.ReadLine().ToUpper();
 
@@ -133,10 +114,7 @@ namespace BattleSea
                 {
                     Print.BattleField(playerField);
 
-                    Console.ForegroundColor = player.color;
-                    Print.Text($"\n  {player.name} turn\n\n");
-                    Console.ForegroundColor = ConsoleColor.Black;
-
+                    Print.Text($"\n  {player.name} turn\n\n", player.color);
                     Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
                     Print.Text("  Enter the number: ");
                     int.TryParse(Console.ReadLine(), out number);

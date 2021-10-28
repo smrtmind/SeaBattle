@@ -41,6 +41,7 @@ namespace BattleSea
                 string[][] player2Ships = player2Field.CreateShips(player2);
 
                 input = BattleField.StartBattle(player1, player2, player1Ships, player2Ships);
+                Console.Clear();
             }
         }
     }

@@ -7,10 +7,7 @@ namespace BattleSea
     {
         public string[][] field { get; private set; }
 
-        public ShipsCreator(string[][] field)
-        {
-            this.field = field;
-        }
+        public ShipsCreator(string[][] field) => this.field = field;
 
         public string[][] CreateShips(Player player)
         {
@@ -51,10 +48,7 @@ namespace BattleSea
                     {
                         Print.BattleField(field);
 
-                        Console.ForegroundColor = player.color;
-                        Print.Text($"\n  {player.name} place your ships\n\n");
-                        Console.ForegroundColor = ConsoleColor.Black;
-
+                        Print.Text($"\n  {player.name} place your ships\n\n", player.color);
                         Print.Text($"  {text} ({amountOfShips} remaining)\n");
                         Print.Text("  Enter the letter: ");
                         input = Console.ReadLine().ToUpper();
@@ -77,10 +71,7 @@ namespace BattleSea
                     {
                         Print.BattleField(field);
 
-                        Console.ForegroundColor = player.color;
-                        Print.Text($"\n  {player.name} place your ships\n\n");
-                        Console.ForegroundColor = ConsoleColor.Black;
-
+                        Print.Text($"\n  {player.name} place your ships\n\n", player.color);
                         Print.Text($"  {text} ({amountOfShips} remaining)\n");
                         Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
                         Print.Text("  Enter the number: ");

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleSea
 {
@@ -15,22 +11,18 @@ namespace BattleSea
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-
         public static void BattleField(string[][] ships)
         {
             Console.Clear();
-            Print.Text("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
+            Text("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
 
             for (int i = 0; i < ships.Length; i++)
             {
-                Console.Write("  ");
+                Text("  ");
 
                 for (int j = 0; j < ships[i].Length; j++)
-                {
-                    Console.Write(ships[i][j] + " ");
-                }
-
-                Console.WriteLine();
+                    Text(ships[i][j] + " ");
+                Text("\n");
             }
         }
     }
