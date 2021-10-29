@@ -41,8 +41,8 @@ namespace BattleSea
 
         public static string StartBattle(Player player1, Player player2, string[][] player1Ships, string[][] player2Ships)
         {
-            int player1ShipDetails = 20;
-            int player2ShipDetails = 20;
+            int player1ShipDetails = 4;
+            int player2ShipDetails = 4;
             string[][] player1Field = GetNewField();
             string[][] player2Field = GetNewField();
             string exitTheGame = string.Empty;
@@ -52,14 +52,14 @@ namespace BattleSea
                 player2ShipDetails = NextTurn(player1, player1Field, player2Ships, ref player2ShipDetails);
                 if (player2ShipDetails == 0)
                 {
-                    Print.Text($"\n  {player1.name} won :)\n\n", player1.color);
+                    Print.Text($"\n  {player1.Name} won :)\n\n", player1.Color);
                     break;
                 }
 
                 player1ShipDetails = NextTurn(player2, player2Field, player1Ships, ref player1ShipDetails);
                 if (player1ShipDetails == 0)
                 {
-                    Print.Text($"\n  {player2.name} won :)\n\n", player2.color);
+                    Print.Text($"\n  {player2.Name} won :)\n\n", player2.Color);
                     break;
                 }
             }
@@ -92,7 +92,7 @@ namespace BattleSea
                 {
                     Print.BattleField(playerField);
 
-                    Print.Text($"\n  {player.name} turn\n\n", player.color);
+                    Print.Text($"\n  {player.Name} turn\n\n", player.Color);
                     Print.Text("  Enter the letter: ");
                     input = Console.ReadLine().ToUpper();
 
@@ -114,7 +114,7 @@ namespace BattleSea
                 {
                     Print.BattleField(playerField);
 
-                    Print.Text($"\n  {player.name} turn\n\n", player.color);
+                    Print.Text($"\n  {player.Name} turn\n\n", player.Color);
                     Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
                     Print.Text("  Enter the number: ");
                     int.TryParse(Console.ReadLine(), out number);

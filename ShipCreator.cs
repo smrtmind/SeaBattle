@@ -14,14 +14,14 @@ namespace BattleSea
             LocateShip(amountOfShips: 1, maxParts: 4,
                        $"Place your \u25A0 \u25A0 \u25A0 \u25A0 ship", player);
 
-            LocateShip(amountOfShips: 2, maxParts: 3,
-                       $"Place your \u25A0 \u25A0 \u25A0 ships", player);
+            //LocateShip(amountOfShips: 2, maxParts: 3,
+            //           $"Place your \u25A0 \u25A0 \u25A0 ships", player);
 
-            LocateShip(amountOfShips: 3, maxParts: 2,
-                       $"Place your \u25A0 \u25A0 ships", player);
+            //LocateShip(amountOfShips: 3, maxParts: 2,
+            //           $"Place your \u25A0 \u25A0 ships", player);
 
-            LocateShip(amountOfShips: 4, maxParts: 1,
-                       $"Place your \u25A0 ships", player);
+            //LocateShip(amountOfShips: 4, maxParts: 1,
+            //           $"Place your \u25A0 ships", player);
 
             return field;
         }
@@ -48,7 +48,7 @@ namespace BattleSea
                     {
                         Print.BattleField(field);
 
-                        Print.Text($"\n  {player.name} place your ships\n\n", player.color);
+                        Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
                         Print.Text($"  {text} ({amountOfShips} remaining)\n");
                         Print.Text("  Enter the letter: ");
                         input = Console.ReadLine().ToUpper();
@@ -71,7 +71,7 @@ namespace BattleSea
                     {
                         Print.BattleField(field);
 
-                        Print.Text($"\n  {player.name} place your ships\n\n", player.color);
+                        Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
                         Print.Text($"  {text} ({amountOfShips} remaining)\n");
                         Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
                         Print.Text("  Enter the number: ");

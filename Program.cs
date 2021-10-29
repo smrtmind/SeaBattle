@@ -6,7 +6,7 @@ namespace BattleSea
     {
         public static Player player1;
         public static Player player2;
-        public static string input;
+        public static string input = string.Empty;
 
         static void Main(string[] args)
         {
@@ -17,20 +17,10 @@ namespace BattleSea
             Print.Text("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
 
             Print.Text("Enter 1-st player's name or press ENTER: ");
-            input = Console.ReadLine();
-
-            if (input.Length > 0)
-                player1 = new Player(input, ConsoleColor.DarkCyan);
-            else
-                player1 = new Player("Player 1", ConsoleColor.DarkCyan);
+            player1 = new Player(Console.ReadLine(), ConsoleColor.DarkCyan);
 
             Print.Text("Enter 2-nd player's name or press ENTER: ");
-            input = Console.ReadLine();
-
-            if (input.Length > 0)
-                player2 = new Player(input, ConsoleColor.DarkGreen);
-            else
-                player2 = new Player("Player 2", ConsoleColor.DarkGreen);
+            player2 = new Player(Console.ReadLine(), ConsoleColor.DarkGreen);
 
             while (input.ToLower() != "n")
             {
