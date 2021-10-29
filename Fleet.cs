@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Threading;
 
-namespace BattleSea
+namespace SeaBattle
 {
-    public class ShipsCreator
+    public class Fleet
     {
-        public string[][] field { get; private set; }
+        public static string[][] Field { get; private set; }
 
-        public ShipsCreator(string[][] field) => this.field = field;
-
-        public string[][] CreateShips(Player player)
+        public static string[][] CreateShips(Player player, string[][] field)
         {
-            LocateShip(amountOfShips: 1, maxParts: 4,
-                       $"Place your \u25A0 \u25A0 \u25A0 \u25A0 ship", player);
+            Field = field;
 
-            //LocateShip(amountOfShips: 2, maxParts: 3,
-            //           $"Place your \u25A0 \u25A0 \u25A0 ships", player);
+            PlaceShip(amountOfShips: 1, maxParts: 4, player);
+            //PlaceShip(amountOfShips: 2, maxParts: 3, player);
+            //PlaceShip(amountOfShips: 3, maxParts: 2, player);
+            //PlaceShip(amountOfShips: 4, maxParts: 1, player);
 
-            //LocateShip(amountOfShips: 3, maxParts: 2,
-            //           $"Place your \u25A0 \u25A0 ships", player);
-
-            //LocateShip(amountOfShips: 4, maxParts: 1,
-            //           $"Place your \u25A0 ships", player);
-
-            return field;
+            return Field;
         }
 
-        private void LocateShip(int amountOfShips, int maxParts, string text, Player player)
+        private static void PlaceShip(int amountOfShips, int maxParts, Player player)
         {
             int letter = 0;
             int number = 0;
@@ -46,10 +39,16 @@ namespace BattleSea
 
                     while (!elementIsFound)
                     {
-                        Print.BattleField(field);
+                        Print.BattleField(Field);
 
                         Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
-                        Print.Text($"  {text} ({amountOfShips} remaining)\n");
+
+                        Print.Text($"  Place your ");
+                        for (int i = 0; i < maxParts; i++)
+                            Print.Text("\u25A0 ");
+                        Print.Text("ship");
+
+                        Print.Text($"({amountOfShips} remaining)\n");
                         Print.Text("  Enter the letter: ");
                         input = Console.ReadLine().ToUpper();
 
@@ -69,10 +68,16 @@ namespace BattleSea
 
                     while (!elementIsFound)
                     {
-                        Print.BattleField(field);
+                        Print.BattleField(Field);
 
                         Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
-                        Print.Text($"  {text} ({amountOfShips} remaining)\n");
+
+                        Print.Text($"  Place your ");
+                        for (int i = 0; i < maxParts; i++)
+                            Print.Text("\u25A0 ");
+                        Print.Text("ship");
+
+                        Print.Text($"({amountOfShips} remaining)\n");
                         Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
                         Print.Text("  Enter the number: ");
                         int.TryParse(Console.ReadLine(), out number);
@@ -82,7 +87,7 @@ namespace BattleSea
                                 elementIsFound = true;
                     }
 
-                    if (field[number][letter] == "\u25A0")
+                    if (Field[number][letter] == "\u25A0")
                     {
                         Print.Text("  this cell is already occupied", ConsoleColor.Red);
                         Thread.Sleep(2000);
@@ -91,9 +96,9 @@ namespace BattleSea
 
                     else
                     {
-                        field[number][letter] = "\u25A0";
+                        Field[number][letter] = "\u25A0";
                         remainingParts--;
-                        Print.BattleField(field);
+                        Print.BattleField(Field);
                     }
                 }
 

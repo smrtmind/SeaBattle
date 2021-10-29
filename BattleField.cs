@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 
-namespace BattleSea
+namespace SeaBattle
 {
     public class BattleField
     {
         public static string[][] field { get; private set; }
 
-        public static string[][] GetNewField()
+        public static string[][] CreateNew()
         {
             field = new string[11][];
 
@@ -43,8 +43,8 @@ namespace BattleSea
         {
             int player1ShipDetails = 4;
             int player2ShipDetails = 4;
-            string[][] player1Field = GetNewField();
-            string[][] player2Field = GetNewField();
+            string[][] player1Field = CreateNew();
+            string[][] player2Field = CreateNew();
             string exitTheGame = string.Empty;
 
             while (player1ShipDetails != 0 || player2ShipDetails != 0)

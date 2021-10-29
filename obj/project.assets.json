@@ -15,9 +15,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\codeBase\\c#\\SeaBattle\\BattleSea.csproj",
-      "projectName": "BattleSea",
-      "projectPath": "D:\\codeBase\\c#\\SeaBattle\\BattleSea.csproj",
+      "projectUniqueName": "D:\\codeBase\\c#\\SeaBattle\\SeaBattle.csproj",
+      "projectName": "SeaBattle",
+      "projectPath": "D:\\codeBase\\c#\\SeaBattle\\SeaBattle.csproj",
       "packagesPath": "C:\\Users\\Oleg\\.nuget\\packages\\",
       "outputPath": "D:\\codeBase\\c#\\SeaBattle\\obj\\",
       "projectStyle": "PackageReference",

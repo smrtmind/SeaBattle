@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BattleSea
+namespace SeaBattle
 {
     public class Print
     {

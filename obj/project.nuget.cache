@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dAhMosExtLZ17HqlSWGDFaIW2vNCAO2NfCHRT0mLNS8Kvvov6PRsTulH+IB7UCscSuu8KdoDcKGN4s2pIzmPTg==",
+  "dgSpecHash": "M9hRs26jj6P8RWdGqx91t9I92wisqCrnXZ0zBALDL7sQJB/nBjdnB7K6Nmay+YRR5c5EY4F1Q7p4VNYPYpDrXg==",
   "success": true,
-  "projectFilePath": "D:\\codeBase\\c#\\SeaBattle\\BattleSea.csproj",
+  "projectFilePath": "D:\\codeBase\\c#\\SeaBattle\\SeaBattle.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
