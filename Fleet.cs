@@ -71,18 +71,17 @@ namespace SeaBattle
                                 elementIsFound = true;
                     }
 
-                    if (Field[number][letter] == "\u25A0")
+                    if (Field[number][letter] == player.ShipSymbol)
                     {
-                        Print.Text("  this cell is already occupied", ConsoleColor.Red);
+                        Print.Text("  this cell is already occupied", ConsoleColor.DarkRed);
                         Thread.Sleep(2000);
                         continue;
                     }
 
                     else
                     {
-                        Field[number][letter] = "\u25A0";
+                        Field[number][letter] = player.ShipSymbol;
                         remainingParts--;
-                        Print.BattleField(Field);
                     }
                 }
 
@@ -97,8 +96,7 @@ namespace SeaBattle
 
                 Print.Text($"  Place your ");
                 for (int i = 0; i < maxParts; i++)
-                    //visual representation of the ship
-                    Print.Text("\u25A0 ");
+                    Print.Text($"{player.ShipSymbol} ");
                 Print.Text("ship");
 
                 Print.Text($"({amountOfShips} remaining)\n");

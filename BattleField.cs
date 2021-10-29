@@ -129,7 +129,7 @@ namespace SeaBattle
                     }
                 }
 
-                if (playerShips[number][letter] == "\u25A0")
+                if (playerShips[number][letter] == player.ShipSymbol)
                 {
                     playerField[number][letter] = "X";
                     playerShips[number][letter] = "X";
@@ -146,7 +146,7 @@ namespace SeaBattle
                     playerField[number][letter] = "o";
                     playerShips[number][letter] = "o";
 
-                    Print.Text("  miss", ConsoleColor.Red);
+                    Print.Text("  miss", ConsoleColor.DarkRed);
                     Thread.Sleep(1000);
 
                     Print.BattleField(playerField);
@@ -155,7 +155,7 @@ namespace SeaBattle
 
                 else
                 {
-                    Print.Text("  you already shot here", ConsoleColor.Red);
+                    Print.Text("  you already shot here", ConsoleColor.DarkRed);
                     Thread.Sleep(2000);
                     continue;
                 }

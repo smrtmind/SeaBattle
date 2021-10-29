@@ -18,7 +18,7 @@ namespace SeaBattle
             Player player1 = new Player(Console.ReadLine(), ConsoleColor.DarkCyan);
 
             Print.Text("Enter 2-nd player's name or press ENTER: ");
-            Player player2 = new Player(Console.ReadLine(), ConsoleColor.DarkGreen);
+            Player player2 = new Player(Console.ReadLine(), ConsoleColor.DarkMagenta);
 
             while (endTheGame.ToLower() != "n")
             {
