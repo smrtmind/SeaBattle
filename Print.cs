@@ -11,17 +11,17 @@ namespace SeaBattle
             Console.ForegroundColor = ConsoleColor.Black;
         }
 
-        public static void BattleField(string[][] ships)
+        public static void BattleField(string[][] field)
         {
             Console.Clear();
             Text("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
 
-            for (int i = 0; i < ships.Length; i++)
+            for (int i = 0; i < field.Length; i++)
             {
                 Text("  ");
 
-                for (int j = 0; j < ships[i].Length; j++)
-                    Text(ships[i][j] + " ");
+                for (int j = 0; j < field[i].Length; j++)
+                    Text(field[i][j] + " ");
                 Text("\n");
             }
         }

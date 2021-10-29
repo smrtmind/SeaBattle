@@ -22,10 +22,8 @@ namespace SeaBattle
 
             while (endTheGame.ToLower() != "n")
             {
-                string[][] player1Fleet = BattleField.CreateNew();
-                string[][] player2Fleet = BattleField.CreateNew();
-                player1Fleet = Fleet.CreateShips(player1, player1Fleet);
-                player2Fleet = Fleet.CreateShips(player2, player2Fleet);
+                string[][] player1Fleet = Fleet.CreateShips(player1, BattleField.CreateNew());
+                string[][] player2Fleet = Fleet.CreateShips(player2, BattleField.CreateNew());
 
                 endTheGame = BattleField.StartBattle(player1, player2, player1Fleet, player2Fleet);
                 Console.Clear();

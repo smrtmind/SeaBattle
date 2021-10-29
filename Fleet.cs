@@ -11,9 +11,13 @@ namespace SeaBattle
         {
             Field = field;
 
+            //battleship
             PlaceShip(amountOfShips: 1, maxParts: 4, player);
+            //cruiser
             //PlaceShip(amountOfShips: 2, maxParts: 3, player);
+            //destroyer
             //PlaceShip(amountOfShips: 3, maxParts: 2, player);
+            //torpedo boat
             //PlaceShip(amountOfShips: 4, maxParts: 1, player);
 
             return Field;
@@ -36,54 +40,34 @@ namespace SeaBattle
                 while (remainingParts > 0)
                 {
                     elementIsFound = false;
-
                     while (!elementIsFound)
                     {
-                        Print.BattleField(Field);
-
-                        Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
-
-                        Print.Text($"  Place your ");
-                        for (int i = 0; i < maxParts; i++)
-                            Print.Text("\u25A0 ");
-                        Print.Text("ship");
-
-                        Print.Text($"({amountOfShips} remaining)\n");
+                        PlaceYourShips();
                         Print.Text("  Enter the letter: ");
                         input = Console.ReadLine().ToUpper();
 
-                        for (int j = 0; j < letters.Length; j++)
+                        for (int i = 0; i < letters.Length; i++)
                         {
-                            if (input == letters[j])
+                            if (input == letters[i])
                             {
                                 elementIsFound = true;
-                                indexOfLetter = j;
-                                letter = numbers[j];
+                                indexOfLetter = i;
+                                letter = numbers[i];
                                 break;
                             }
                         }
                     }
 
                     elementIsFound = false;
-
                     while (!elementIsFound)
                     {
-                        Print.BattleField(Field);
-
-                        Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
-
-                        Print.Text($"  Place your ");
-                        for (int i = 0; i < maxParts; i++)
-                            Print.Text("\u25A0 ");
-                        Print.Text("ship");
-
-                        Print.Text($"({amountOfShips} remaining)\n");
+                        PlaceYourShips();
                         Print.Text($"  Enter the letter: {letters[indexOfLetter]}\n");
                         Print.Text("  Enter the number: ");
                         int.TryParse(Console.ReadLine(), out number);
 
-                        for (int j = 0; j < numbers.Length; j++)
-                            if (number == numbers[j])
+                        for (int i = 0; i < numbers.Length; i++)
+                            if (number == numbers[i])
                                 elementIsFound = true;
                     }
 
@@ -104,6 +88,20 @@ namespace SeaBattle
 
                 amountOfShips--;
                 remainingParts = maxParts;
+            }
+
+            void PlaceYourShips()
+            {
+                Print.BattleField(Field);
+                Print.Text($"\n  {player.Name} place your ships\n\n", player.Color);
+
+                Print.Text($"  Place your ");
+                for (int i = 0; i < maxParts; i++)
+                    //visual representation of the ship
+                    Print.Text("\u25A0 ");
+                Print.Text("ship");
+
+                Print.Text($"({amountOfShips} remaining)\n");
             }
         }
     }
