@@ -5,58 +5,58 @@ namespace SeaBattle
 {
     public class BattleField
     {
-        public static string[][] field { get; private set; }
+        public static string[][] Field { get; private set; }
 
-        public static string[][] CreateNew()
+        public static string[][] GetEmptyField()
         {
-            field = new string[11][];
+            Field = new string[11][];
 
             //initialization of top letters
-            field[0] = new string[11];
-            field[0][0] = "  ";
+            Field[0] = new string[11];
+            Field[0][0] = "  ";
 
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
-            for (int j = 1; j < field[0].Length; j++)
-                field[0][j] = letters[j - 1];
+            for (int j = 1; j < Field[0].Length; j++)
+                Field[0][j] = letters[j - 1];
 
             //initialization of first numbers
-            for (int i = 1; i < field.Length; i++)
+            for (int i = 1; i < Field.Length; i++)
             {
-                field[i] = new string[11];
-                field[i][0] = i.ToString() + " ";
+                Field[i] = new string[11];
+                Field[i][0] = i.ToString() + " ";
             }
 
-            field[10][0] = 10.ToString();
+            Field[10][0] = 10.ToString();
 
             //initializition of fillers
-            for (int i = 1; i < field.Length; i++)
-                for (int j = 1; j < field[i].Length; j++)
-                    field[i][j] = ".";
+            for (int i = 1; i < Field.Length; i++)
+                for (int j = 1; j < Field[i].Length; j++)
+                    Field[i][j] = ".";
 
-            Print.BattleField(field);
+            Print.BattleField(Field);
 
-            return field;
+            return Field;
         }
 
-        public static string StartBattle(Player player1, Player player2, string[][] player1Ships, string[][] player2Ships)
+        public static string StartBattle(Player player1, Player player2, string[][] player1Fleet, string[][] player2Fleet)
         {
             int player1ShipDetails = 4;
             int player2ShipDetails = 4;
-            string[][] player1Field = CreateNew();
-            string[][] player2Field = CreateNew();
+            string[][] player1Field = GetEmptyField();
+            string[][] player2Field = GetEmptyField();
             string exitTheGame = string.Empty;
 
             while (player1ShipDetails != 0 || player2ShipDetails != 0)
             {
-                player2ShipDetails = NextTurn(player1, player1Field, player2Ships, ref player2ShipDetails);
+                player2ShipDetails = NextTurn(player1, player1Field, player2Fleet, ref player2ShipDetails);
                 if (player2ShipDetails == 0)
                 {
                     Print.Text($"\n  {player1.Name} won :)\n\n", player1.Color);
                     break;
                 }
 
-                player1ShipDetails = NextTurn(player2, player2Field, player1Ships, ref player1ShipDetails);
+                player1ShipDetails = NextTurn(player2, player2Field, player1Fleet, ref player1ShipDetails);
                 if (player1ShipDetails == 0)
                 {
                     Print.Text($"\n  {player2.Name} won :)\n\n", player2.Color);
@@ -129,7 +129,7 @@ namespace SeaBattle
                     }
                 }
 
-                if (playerShips[number][letter] == player.ShipSymbol)
+                if (playerShips[number][letter] == Fleet.ShipSymbol)
                 {
                     playerField[number][letter] = "X";
                     playerShips[number][letter] = "X";

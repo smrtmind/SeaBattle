@@ -7,6 +7,9 @@ namespace SeaBattle
     {
         public static string[][] Field { get; private set; }
 
+        //visual representation of a ships. Change it here to change everywhere.
+        public static string ShipSymbol = "\u25A0";
+
         public static string[][] CreateShips(Player player, string[][] field)
         {
             Field = field;
@@ -71,7 +74,7 @@ namespace SeaBattle
                                 elementIsFound = true;
                     }
 
-                    if (Field[number][letter] == player.ShipSymbol)
+                    if (Field[number][letter] == ShipSymbol)
                     {
                         Print.Text("  this cell is already occupied", ConsoleColor.DarkRed);
                         Thread.Sleep(2000);
@@ -80,7 +83,7 @@ namespace SeaBattle
 
                     else
                     {
-                        Field[number][letter] = player.ShipSymbol;
+                        Field[number][letter] = ShipSymbol;
                         remainingParts--;
                     }
                 }
@@ -96,7 +99,7 @@ namespace SeaBattle
 
                 Print.Text($"  Place your ");
                 for (int i = 0; i < maxParts; i++)
-                    Print.Text($"{player.ShipSymbol} ");
+                    Print.Text($"{ShipSymbol} ");
                 Print.Text("ship");
 
                 Print.Text($"({amountOfShips} remaining)\n");
