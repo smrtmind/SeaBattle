@@ -8,20 +8,22 @@ namespace SeaBattle
         public static string[][] GetEmpty()
         {
             string[][] newField = new string[11][];
-
-            //initialization of top letters
-            newField[0] = new string[11];
-            newField[0][0] = "  ";
-
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
-            for (int j = 1; j < newField[0].Length; j++)
-                newField[0][j] = letters[j - 1];
+            //initialisation of jugged array
+            for (int i = 0; i < newField.Length; i++)
+                newField[i] = new string[11];
+
+            //initialisation of top letters
+            for (int i = 1; i < newField.Length; i++)
+            {
+                newField[0][0] = "  ";
+                newField[0][i] = letters[i - 1];
+            }
 
             //initialization of first numbers
             for (int i = 1; i < newField.Length; i++)
             {
-                newField[i] = new string[11];
                 newField[i][0] = i.ToString() + " ";
 
                 if (i == 10) 
