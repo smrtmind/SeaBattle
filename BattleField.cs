@@ -5,75 +5,59 @@ namespace SeaBattle
 {
     public class BattleField
     {
-        public static string[][] Field { get; private set; }
-
-        public static string[][] GetEmptyField()
+        public static string[][] GetEmpty()
         {
-            Field = new string[11][];
+            string[][] newField = new string[11][];
 
             //initialization of top letters
-            Field[0] = new string[11];
-            Field[0][0] = "  ";
+            newField[0] = new string[11];
+            newField[0][0] = "  ";
 
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
-            for (int j = 1; j < Field[0].Length; j++)
-                Field[0][j] = letters[j - 1];
+            for (int j = 1; j < newField[0].Length; j++)
+                newField[0][j] = letters[j - 1];
 
             //initialization of first numbers
-            for (int i = 1; i < Field.Length; i++)
+            for (int i = 1; i < newField.Length; i++)
             {
-                Field[i] = new string[11];
-                Field[i][0] = i.ToString() + " ";
+                newField[i] = new string[11];
+                newField[i][0] = i.ToString() + " ";
             }
 
-            Field[10][0] = 10.ToString();
+            newField[10][0] = 10.ToString();
 
             //initializition of fillers
-            for (int i = 1; i < Field.Length; i++)
-                for (int j = 1; j < Field[i].Length; j++)
-                    Field[i][j] = ".";
+            for (int i = 1; i < newField.Length; i++)
+                for (int j = 1; j < newField[i].Length; j++)
+                    newField[i][j] = ".";
 
-            Print.BattleField(Field);
+            Print.BattleField(newField);
 
-            return Field;
+            return newField;
         }
 
-        public static string StartBattle(Player player1, Player player2, string[][] player1Fleet, string[][] player2Fleet)
+        public static void StartBattle(Player P1, Player P2, Fleet fleetP1, Fleet fleetP2)
         {
-            int player1ShipDetails = 4;
-            int player2ShipDetails = 4;
-            string[][] player1Field = GetEmptyField();
-            string[][] player2Field = GetEmptyField();
-            string exitTheGame = string.Empty;
-
-            while (player1ShipDetails != 0 || player2ShipDetails != 0)
+            while (fleetP1.FleetHealth != 0 || fleetP2.FleetHealth != 0)
             {
-                player2ShipDetails = NextTurn(player1, player1Field, player2Fleet, ref player2ShipDetails);
-                if (player2ShipDetails == 0)
+                fleetP2.FleetHealth = NextTurn(P1, fleetP1.DraftField, fleetP2.Field, fleetP2.FleetHealth);
+                if (fleetP2.FleetHealth == 0)
                 {
-                    Print.Text($"\n  {player1.Name} won :)\n\n", player1.Color);
-                    break;
+                    Print.Text($"\n  {P1.Name} won :)\n\n", P1.Color);
+                    return;
                 }
 
-                player1ShipDetails = NextTurn(player2, player2Field, player1Fleet, ref player1ShipDetails);
-                if (player1ShipDetails == 0)
+                fleetP1.FleetHealth = NextTurn(P2, fleetP2.DraftField, fleetP1.Field, fleetP1.FleetHealth);
+                if (fleetP1.FleetHealth == 0)
                 {
-                    Print.Text($"\n  {player2.Name} won :)\n\n", player2.Color);
-                    break;
+                    Print.Text($"\n  {P2.Name} won :)\n\n", P2.Color);
+                    return;
                 }
             }
-
-            while (exitTheGame.ToLower() != "y" && exitTheGame.ToLower() != "n")
-            {
-                Print.Text("  Do you want to play again? [y] / [n]: ");
-                exitTheGame = Console.ReadLine();
-            }
-
-            return exitTheGame;
         }
 
-        private static int NextTurn(Player player, string[][] playerField, string[][] playerShips, ref int playerShipDetails)
+        private static int NextTurn(Player player, string[][] playerField, string[][] playerFleet, int fleetHealth)
         {
             int letter = 0;
             int number = 0;
@@ -84,7 +68,7 @@ namespace SeaBattle
             string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
             int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            while (playerShipDetails != 0)
+            while (fleetHealth != 0)
             {
                 elementIsFound = false;
 
@@ -129,11 +113,11 @@ namespace SeaBattle
                     }
                 }
 
-                if (playerShips[number][letter] == Fleet.ShipSymbol)
+                if (playerFleet[number][letter] == Fleet.ShipSymbol)
                 {
                     playerField[number][letter] = "X";
-                    playerShips[number][letter] = "X";
-                    playerShipDetails--;
+                    playerFleet[number][letter] = "X";
+                    fleetHealth--;
 
                     Print.Text("  BOOM!", ConsoleColor.DarkRed);
                     Thread.Sleep(1000);
@@ -141,10 +125,10 @@ namespace SeaBattle
                     Print.BattleField(playerField);
                 }
 
-                else if (playerShips[number][letter] == ".")
+                else if (playerFleet[number][letter] == ".")
                 {
                     playerField[number][letter] = "o";
-                    playerShips[number][letter] = "o";
+                    playerFleet[number][letter] = "o";
 
                     Print.Text("  miss", ConsoleColor.DarkRed);
                     Thread.Sleep(1000);
@@ -161,7 +145,7 @@ namespace SeaBattle
                 }
             }
 
-            return playerShipDetails;
+            return fleetHealth;
         }
     }
 }

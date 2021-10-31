@@ -5,28 +5,30 @@ namespace SeaBattle
 {
     public class Fleet
     {
-        public static string[][] Field { get; private set; }
+        public string[][] Field { get; private set; }
+        public string[][] DraftField { get; private set; }
+        public int FleetHealth { get; set; }
 
         //visual representation of a ships. Change it here to change everywhere.
         public static string ShipSymbol = "\u25A0";
 
-        public static string[][] CreateShips(Player player, string[][] field)
+        public Fleet(string[][] field)
         {
             Field = field;
+            //counter of parts to be destroyed to win
+            FleetHealth = 20;
+            DraftField = BattleField.GetEmpty();
+        }
 
-            //battleship
-            PlaceShip(amountOfShips: 1, maxParts: 4, player);
-            //cruiser
-            //PlaceShip(amountOfShips: 2, maxParts: 3, player);
-            //destroyer
-            //PlaceShip(amountOfShips: 3, maxParts: 2, player);
-            //torpedo boat
-            //PlaceShip(amountOfShips: 4, maxParts: 1, player);
+        public string[][] CreateShips(Player player)
+        {
+            for (int amountOfShips = 1, maxParts = 4; amountOfShips <= 4; amountOfShips++, maxParts--)
+                PlaceShip(amountOfShips, maxParts, player);
 
             return Field;
         }
 
-        private static void PlaceShip(int amountOfShips, int maxParts, Player player)
+        private void PlaceShip(int amountOfShips, int maxParts, Player player)
         {
             int letter = 0;
             int number = 0;

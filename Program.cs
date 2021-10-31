@@ -6,7 +6,7 @@ namespace SeaBattle
     {
         static void Main(string[] args)
         {
-            string endTheGame = string.Empty;
+            string exitTheGame = string.Empty;
 
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.Clear();
@@ -15,18 +15,27 @@ namespace SeaBattle
             Print.Text("SeaBattle\n".PadLeft(20, ' ') + "\n", ConsoleColor.DarkBlue);
 
             Print.Text("Enter 1-st player's name or press ENTER: ");
-            Player player1 = new Player(Console.ReadLine(), ConsoleColor.DarkCyan);
+            Player P1 = new Player(Console.ReadLine(), ConsoleColor.DarkCyan);
 
             Print.Text("Enter 2-nd player's name or press ENTER: ");
-            Player player2 = new Player(Console.ReadLine(), ConsoleColor.DarkMagenta);
+            Player P2 = new Player(Console.ReadLine(), ConsoleColor.DarkMagenta);
 
-            while (endTheGame.ToLower() != "n")
+            while (exitTheGame != "n")
             {
-                string[][] player1Fleet = Fleet.CreateShips(player1, BattleField.GetEmptyField());
-                string[][] player2Fleet = Fleet.CreateShips(player2, BattleField.GetEmptyField());
+                Fleet fleetP1 = new Fleet(BattleField.GetEmpty());
+                Fleet fleetP2 = new Fleet(BattleField.GetEmpty());
 
-                endTheGame = BattleField.StartBattle(player1, player2, player1Fleet, player2Fleet);
-                Console.Clear();
+                fleetP1.CreateShips(P1);
+                fleetP2.CreateShips(P2);
+
+                BattleField.StartBattle(P1, P2, fleetP1, fleetP2);
+
+                do
+                {
+                    Print.Text("  Do you want to play again? [y] / [n]: ");
+                    exitTheGame = Console.ReadLine().ToLower();
+                }
+                while (exitTheGame != "y" && exitTheGame != "n");
             }
         }
     }
