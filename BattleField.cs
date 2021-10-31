@@ -23,9 +23,10 @@ namespace SeaBattle
             {
                 newField[i] = new string[11];
                 newField[i][0] = i.ToString() + " ";
-            }
 
-            newField[10][0] = 10.ToString();
+                if (i == 10) 
+                    newField[i][0] = i.ToString();
+            }
 
             //initializition of fillers
             for (int i = 1; i < newField.Length; i++)
@@ -37,7 +38,7 @@ namespace SeaBattle
             return newField;
         }
 
-        public static void StartBattle(Player P1, Player P2, Fleet fleetP1, Fleet fleetP2)
+        public static void StartBattle(Player P1, Fleet fleetP1, Player P2, Fleet fleetP2)
         {
             while (fleetP1.FleetHealth != 0 || fleetP2.FleetHealth != 0)
             {

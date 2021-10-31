@@ -15,9 +15,11 @@ namespace SeaBattle
 
         private string SetName(string name)
         {
+            Random random = new Random();
+
             if (name.Length > 0)
                 return name;
-            else return "Player";
+            else return $"Soldier {random.Next(50, 300)}";
         }
     }
 }
