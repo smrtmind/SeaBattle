@@ -11,13 +11,14 @@ namespace SeaBattle
 
         //visual representation of a ships. Change it here to change everywhere.
         public static string ShipSymbol = "\u25A0";
+        public static string CellFiller = ".";
 
         public Fleet(string[][] field)
         {
             Field = field;
             //counter of parts to be destroyed to win
             FleetHealth = 20;
-            DraftField = BattleField.GetEmpty();
+            DraftField = Battle.GetNewField();
         }
 
         public string[][] CreateShips(Player player)

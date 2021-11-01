@@ -23,14 +23,14 @@ namespace SeaBattle
             while (exitTheGame != "n")
             {
                 //players fleet initialisation
-                Fleet fleetP1 = new Fleet(BattleField.GetEmpty());
-                Fleet fleetP2 = new Fleet(BattleField.GetEmpty());
+                Fleet fleetP1 = new Fleet(Battle.GetNewField());
+                Fleet fleetP2 = new Fleet(Battle.GetNewField());
 
                 fleetP1.CreateShips(P1);
                 fleetP2.CreateShips(P2);
 
                 //here starts and ends current game
-                BattleField.StartBattle(P1, fleetP1, P2, fleetP2);
+                Battle.Start(P1, fleetP1, P2, fleetP2);
 
                 do
                 {
