@@ -35,8 +35,6 @@ namespace SeaBattle
                 for (int j = 1; j < newField[i].Length; j++)
                     newField[i][j] = Fleet.CellFiller;
 
-            Print.BattleField(newField);
-
             return newField;
         }
 
