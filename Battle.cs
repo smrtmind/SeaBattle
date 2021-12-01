@@ -5,10 +5,12 @@ namespace SeaBattle
 {
     public class Battle
     {
+        private static int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        private static string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+
         public static string[][] GetNewField()
         {
             string[][] newField = new string[11][];
-            string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
             //initialisation of jugged array
             for (int i = 0; i < newField.Length; i++)
@@ -60,18 +62,13 @@ namespace SeaBattle
 
         private static int NextTurn(Player player, string[][] playerField, string[][] playerFleet, int fleetHealth)
         {
-            int letter = 0;
-            int number = 0;
-            int indexOfLetter = 0;
-            string input = string.Empty;
-            bool elementIsFound = false;
-
-            string[] letters = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
-            int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            int letter = default;
+            int number = default;
+            int indexOfLetter = default;
 
             while (fleetHealth != 0)
             {
-                elementIsFound = false;
+                bool elementIsFound = false;
 
                 while (!elementIsFound)
                 {
@@ -79,7 +76,7 @@ namespace SeaBattle
 
                     Print.Text($"\n  {player.Name} turn\n\n", player.Color);
                     Print.Text("  Enter the letter: ");
-                    input = Console.ReadLine().ToUpper();
+                    string input = Console.ReadLine().ToUpper();
 
                     for (int j = 0; j < letters.Length; j++)
                     {
